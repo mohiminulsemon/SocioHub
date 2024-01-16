@@ -4,6 +4,8 @@ from django.contrib.auth.decorators import login_required
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from . import forms
+from django.contrib.auth.mixins import LoginRequiredMixin
+from django.views import View
 from django.contrib.auth.forms import AuthenticationForm, PasswordChangeForm, SetPasswordForm
 from django.core.mail import EmailMultiAlternatives
 from django.template.loader import render_to_string
@@ -137,3 +139,21 @@ def change_password2(request):
         form = SetPasswordForm(request.user)
 
     return render(request, 'changePassword.html', {'form': form, 'title': 'Change without old Password'})
+
+class UserProfileUpdateView(LoginRequiredMixin,View):
+    template_name = './update_profile.html'
+
+    def get(self, request):
+        form = forms.UserUpdateForm(instance=request.user) 
+        return render(request, self.template_name, {'form': form})
+
+
+    def post(self, request):  
+        form = forms.UserUpdateForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.success(
+                request, 'Your profile has been updated successfully!')
+            return redirect('home')
+        else:
+            print(form.errors)
