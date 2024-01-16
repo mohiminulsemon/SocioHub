@@ -1,3 +1,7 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+
 {% for post in posts %}
   <div class="post">
     <h2>{{ post.title }}</h2>
@@ -6,31 +10,49 @@
       <img class="w-20 h-20" src="{{ post.image.url }}" alt="{{ post.title }}">
     {% endif %}
 
-        <!-- Like/Unlike button and likes count -->
-        <form method="post" action="{% url 'like_post' post.id %}">
-            {% csrf_token %}
-            {% if request.user in post.likes.all %}
-              <button type="submit" name="action" value="unlike">Unlike</button>
-            {% else %}
-              <button type="submit" name="action" value="like">Like</button>
-            {% endif %}
-          </form>
-          <p>Likes: {{ post.likes.count }}</p>
-          
+    <!-- Like/Unlike button and likes count -->
+    <form method="post" action="{% url 'like_post' post.id %}">
+      {% csrf_token %}
+      {% if request.user in post.likes.all %}
+        <button type="submit" name="action" value="unlike">Unlike</button>
+      {% else %}
+        <button type="submit" name="action" value="like">Like</button>
+      {% endif %}
+    </form>
+    <p>Likes: {{ post.likes.count }}</p>
+
     <!-- Display comments for this post -->
     <h3>Comments:</h3>
     {% for comment in comments %}
       {% if comment.post == post %}
-        <p>{{ comment.user.username }}: {{ comment.text }}</p>
+        <div class="comment">
+          <p>{{ comment.user.username }}: 
+            {% if comment.edit_mode %}
+              <form method="post" action="{% url 'toggle_edit_comment' comment.id %}">
+                {% csrf_token %}
+                {{ comment_form.text }} {# Change this line to display the text input field #}
+                <button type="submit">Save</button>
+              </form>
+            {% else %}
+              {{ comment.text }}
+              {% if comment.user == request.user %}
+                <a href="{% url 'toggle_edit_comment' comment.id %}">Edit</a>
+                <a href="{% url 'delete_comment' comment.id %}">Delete</a>
+              {% endif %}
+            {% endif %}
+          </p>
+        </div>
       {% endif %}
     {% endfor %}
 
     <!-- Comment form for this post -->
-    <form method="post" action="{% url 'post_list' %}">
+    <form method="post" action="{% url 'post_list' %}"> {# Change to 'add_comment' or appropriate view name #}
       {% csrf_token %}
-      {{ comment_form.as_p }}
+      {{ comment_form.as_p }} {# Use the rendering method for the entire form #}
       <input type="hidden" name="post_id" value="{{ post.id }}">
       <button type="submit">Add Comment</button>
     </form>
   </div>
 {% endfor %}
+
+{% endblock %}

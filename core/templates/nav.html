@@ -1,24 +1,115 @@
-<header class="text-gray-600 body-font">
-    <div class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center">
-      <a class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0">
-        <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
-          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
-        </svg>
-        <span class="ml-3 text-xl">Phibook</span>
-      </a>
-      
-      <nav class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center">
-        <a class="mr-5 hover:text-gray-900" href="{% url 'profile' %}">Profile</a>
-        <a class="mr-5 hover:text-gray-900" href="{% url 'signup' %}">SignUp</a>
-        <a class="mr-5 hover:text-gray-900" href="{% url 'login' %}">login</a>
-        <a class="mr-5 hover:text-gray-900" href="{% url 'logout' %}">logout</a>
-      </nav>
-      
-      <button class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0">Button
-        <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-4 h-4 ml-1" viewBox="0 0 24 24">
-          <path d="M5 12h14M12 5l7 7-7 7"></path>
+<nav class="text-gray-600 body-font">
+  <div
+    class="container mx-auto flex flex-wrap p-5 flex-col md:flex-row items-center"
+  >
+    <a
+      class="flex title-font font-medium items-center text-gray-900 mb-4 md:mb-0"
+      href="{% url 'home' %}"
+    >
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full"
+        viewBox="0 0 24 24"
+      >
+        <path
+          d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"
+        ></path>
+      </svg>
+      <span class="ml-3 text-xl">Phibook</span>
+    </a>
+
+    <nav
+      class="md:ml-auto md:mr-auto flex flex-wrap items-center text-base justify-center"
+    ></nav>
+
+    {% if user.is_authenticated %}
+    <!-- Dropdown Trigger -->
+    <div class="relative inline-block text-left mr-2">
+      <button
+        type="button"
+        class="inline-flex items-center justify-center w-full px-4 py-2 border border-transparent text-sm leading-5 font-medium rounded-md text-white bg-gray-500 hover:bg-gray-600 focus:outline-none focus:border-gray-900 focus:shadow-outline-gray active:bg-gray-800 transition ease-in-out duration-150"
+        id="dropdown-menu-trigger"
+      >
+        Dashboard
+        <svg
+          fill="#000000"
+          class="-mr-1 ml-2 h-5 w-5"
+          version="1.1"
+          id="Layer_1"
+          xmlns="http://www.w3.org/2000/svg"
+          xmlns:xlink="http://www.w3.org/1999/xlink"
+          viewBox="0 0 330 330"
+          xml:space="preserve"
+        >
+          <path
+            id="XMLID_24_"
+            d="M216.358,271.76c-2.322-5.605-7.792-9.26-13.858-9.26H180V15c0-8.284-6.716-15-15-15
+	c-8.284,0-15,6.716-15,15v247.5h-22.5c-6.067,0-11.537,3.655-13.858,9.26c-2.321,5.605-1.038,12.057,3.252,16.347l37.5,37.5
+	C157.322,328.536,161.161,330,165,330s7.678-1.464,10.607-4.394l37.5-37.5C217.396,283.816,218.68,277.365,216.358,271.76z"
+          />
         </svg>
       </button>
+
+      <!-- Dropdown Menu -->
+      <div
+        class="origin-top-right absolute right-0 mt-2 w-32 rounded-md shadow-lg bg-white"
+        id="dropdown-menu"
+      >
+        <div class="py-1">
+          <!-- Dropdown items go here -->
+          <a
+            href="{% url 'profile' %}"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            >Profile</a
+          >
+          <a
+            href="{% url 'add_post' %}"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            >Add Post</a
+          >
+          <a
+            href="{% url 'my_posts' %}"
+            class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100 hover:text-gray-900"
+            >My Posts</a
+          >
+        </div>
+      </div>
     </div>
-  </header>
-  
+
+    <a
+      class="inline-flex items-center bg-gray-100 border-0 py-1 px-3 focus:outline-none hover:bg-gray-200 rounded text-base mt-4 md:mt-0"
+      href="{% url 'logout' %}"
+    >
+      Logout
+      <svg
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        class="w-4 h-4 ml-1"
+        viewBox="0 0 24 24"
+      >
+        <path d="M5 12h14M12 5l7 7-7 7"></path>
+      </svg>
+    </a>
+
+    {% else %}
+    <a
+      class="inline-flex items-center bg-gray-300 border-0 py-1 px-3 focus:outline-none hover:bg-gray-500 rounded text-black mt-4 md:mt-0 mr-2"
+      href="{% url 'signup' %}"
+      >SignUp</a
+    >
+    <a
+      class="inline-flex items-center bg-gray-300 border-0 py-1 px-3 focus:outline-none hover:bg-gray-500 rounded text-black mt-4 md:mt-0"
+      href="{% url 'login' %}"
+      >login</a
+    >
+    {% endif %}
+  </div>
+</nav>

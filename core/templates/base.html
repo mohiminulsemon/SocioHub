@@ -13,14 +13,15 @@
       href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
+      <!-- Include Alpine.js -->
+  <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
 
     {% block head_extra %}{% endblock %}
     <style>
       footer {
-        position: fixed !important;
-        bottom: 0 !important;
-        width: 100%;
-      }
+                bottom: 0 ;
+                width: 100%;
+            }
     </style>
   </head>
   <body>
@@ -34,5 +35,22 @@
 
     {% endblock %}
     {% include 'footer.html' %}
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        const trigger = document.getElementById('dropdown-menu-trigger');
+        const menu = document.getElementById('dropdown-menu');
+    
+        trigger.addEventListener('click', function () {
+          menu.classList.toggle('hidden');
+        });
+    
+        document.addEventListener('click', function (event) {
+          if (!trigger.contains(event.target) && !menu.contains(event.target)) {
+            menu.classList.add('hidden');
+          }
+        });
+      });
+    </script>
   </body>
 </html>

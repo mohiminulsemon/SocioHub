@@ -91,7 +91,12 @@ def user_login(request):
 
     return render(request, 'login.html', {'form': form})
 
-
+# @login_required
+# class LogoutView(View):  # Renamed to use a singular name convention
+#     def get(self, request): 
+#         logout(request) 
+#         messages.success(request, 'You have successfully logged out.')
+#         return redirect('home')
 @login_required
 def user_logout(request):
     logout(request)

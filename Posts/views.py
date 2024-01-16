@@ -15,6 +15,25 @@ def my_posts(request):
 
 
 @login_required
+def post_details(request, post_id):
+    post = get_object_or_404(models.Post, id=post_id)
+
+    if request.method == 'POST':
+        comment_form = forms.CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            new_comment.user = request.user
+            new_comment.post = post
+            new_comment.save()
+            messages.success(request, 'Comment added successfully!')
+
+    comments = models.Comment.objects.filter(post=post)
+    comment_form = forms.CommentForm()
+
+    return render(request, 'post_details.html', {'post': post, 'comments': comments, 'comment_form': comment_form})
+
+
+@login_required
 def post_list(request):
     if request.method == 'POST':
         comment_form = forms.CommentForm(request.POST)
@@ -51,7 +70,7 @@ def like_post(request, post_id):
         elif action == 'unlike':
             post.likes.remove(request.user)
 
-    return redirect('post_list')
+    return redirect('home')
 
 
 @login_required
@@ -87,3 +106,28 @@ def delete_post(request, pk):
     post = get_object_or_404(models.Post, pk=pk)
     post.delete()
     return redirect('home')
+
+
+# comment section
+@login_required
+def toggle_edit_comment(request, comment_id):
+    comment = get_object_or_404(models.Comment, id=comment_id)
+
+    if comment.user != request.user:
+        return HttpResponseForbidden("You don't have permission to edit this comment.")
+
+    comment.edit_mode = not comment.edit_mode
+    comment.save()
+
+    return redirect('post_list')
+
+
+@login_required
+def delete_comment(request, comment_id):
+    comment = get_object_or_404(models.Comment, id=comment_id)
+
+    if comment.user != request.user:
+        return HttpResponseForbidden("You don't have permission to delete this comment.")
+
+    comment.delete()
+    return redirect('post_list')
