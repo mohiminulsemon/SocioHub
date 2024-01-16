@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Post List</h1>
+    <ul>
+        {% for post in posts %}
+            <li>
+                <a href="{% url 'edit_post' pk=post.pk %}">{{ post.content }}</a>
+                {% if post.image %}
+                <img src="{{ post.image.url }}" alt="">
+            {% else %}
+                <p>No image available</p>
+            {% endif %}
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}
