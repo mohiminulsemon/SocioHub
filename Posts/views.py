@@ -1,14 +1,58 @@
 from django.shortcuts import render, get_object_or_404, redirect
 from django.contrib.auth.decorators import login_required
-from .forms import PostForm
+from .forms import PostForm,CommentForm
 from django.http import HttpResponseForbidden
 from . import models
+from . import forms
+from django.contrib import messages
+
+
+@login_required
+def my_posts(request):
+    comments = models.Comment.objects.all()  # Fetch all comments
+    user_posts = models.Post.objects.filter(author=request.user)
+    return render(request, 'my_posts.html', {'posts': user_posts, 'comments': comments})
 
 
 @login_required
 def post_list(request):
+    if request.method == 'POST':
+        comment_form = forms.CommentForm(request.POST)
+        if comment_form.is_valid():
+            new_comment = comment_form.save(commit=False)
+            
+            # Extract user_id and post_id from the form data
+            user_id = request.user.id
+            post_id = request.POST.get('post_id')
+
+            # Set user_id and post_id for the comment
+            new_comment.user_id = user_id
+            new_comment.post_id = post_id
+            new_comment.save()
+
+            messages.success(request, 'Comment added successfully!')
+    
     posts = models.Post.objects.all()
-    return render(request, 'My_posts.html', {'posts': posts})
+    comments = models.Comment.objects.all()  # Fetch all comments
+    comment_form = forms.CommentForm()
+
+    return render(request, 'All_posts.html', {'posts': posts, 'comments': comments, 'comment_form': comment_form})
+
+
+@login_required
+def like_post(request, post_id):
+    post = get_object_or_404(models.Post, id=post_id)
+
+    if request.method == 'POST':
+        action = request.POST.get('action')
+        
+        if action == 'like':
+            post.likes.add(request.user)
+        elif action == 'unlike':
+            post.likes.remove(request.user)
+
+    return redirect('post_list')
+
 
 @login_required
 def add_post(request):
@@ -39,7 +83,7 @@ def edit_post(request, pk):
     return render(request, 'edit_post.html', {'form': form})
 
 @login_required
-def delete_post(request, id):
-    post = get_object_or_404(models.Post, pk=id)
+def delete_post(request, pk):
+    post = get_object_or_404(models.Post, pk=pk)
     post.delete()
     return redirect('home')

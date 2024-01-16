@@ -1,16 +1,19 @@
-{% extends 'base.html' %}
-{% block content %}
-    <h1>Post List</h1>
-    <ul>
-        {% for post in posts %}
-            <li>
-                <a href="{% url 'edit_post' pk=post.pk %}">{{ post.content }}</a>
-                {% if post.image %}
-                <img src="{{ post.image.url }}" alt="">
-            {% else %}
-                <p>No image available</p>
-            {% endif %}
-            </li>
-        {% endfor %}
-    </ul>
-{% endblock %}
+{% for post in posts %}
+  <div class="post">
+    <h2>{{ post.title }}</h2>
+    <p>{{ post.content }}</p>
+    {% if post.image %}
+      <img class="w-20 h-20" src="{{ post.image.url }}" alt="{{ post.title }}">
+    {% endif %}
+    <!-- Add edit and delete buttons -->
+    <a href="{% url 'edit_post' post.id %}">Edit</a>
+    <a href="{% url 'delete_post' post.id %}">Delete</a>
+    <!-- Display comments for this post -->
+    <h3>Comments:</h3>
+    {% for comment in comments %}
+      {% if comment.post == post %}
+        <p>{{ comment.user.username }}: {{ comment.text }}</p>
+      {% endif %}
+    {% endfor %}
+  </div>
+{% endfor %}
