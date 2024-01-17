@@ -13,13 +13,30 @@
 
     <p class="text-gray-700">Likes: {{ post.likes.count }}</p>
 
-    <!-- Display comments for this post -->
-    <h3 class="text-xl font-semibold mt-6 mb-2">Comments:</h3>
-    {% for comment in comments %}
-      <div class="bg-gray-100 p-4 rounded-md mb-2">
-        <p class="text-gray-800"><strong>{{ comment.user.username }}:</strong> {{ comment.text }}</p>
-      </div>
-    {% endfor %}
+
+      <!-- Display comments for this post -->
+      <h3 class="text-xl font-semibold mt-6 mb-2">Comments:</h3>
+      {% for comment in comments %}
+        {% if comment.post == post %}
+          <div class="bg-gray-100 p-4 rounded-md mb-2">
+            <p class="text-gray-800"><strong>{{ comment.user.username }}:</strong>
+              {% if comment.edit_mode %}
+                <form method="post" action="{% url 'toggle_edit_comment' comment.id %}">
+                  {% csrf_token %}
+                  {{ comment_form.text }} {# Change this line to display the text input field #}
+                  <button class="text-blue-500 hover:text-blue-600 p-4 border-2 border-blue-500 rounded" type="submit">Save</button>
+                </form>
+              {% else %}
+                {{ comment.text }}
+                {% if comment.user == request.user %}
+                  <a class="text-blue-500" href="{% url 'toggle_edit_comment' comment.id %}">Edit</a>
+                  <a class="text-red-500" href="{% url 'delete_comment' comment.id %}">Delete</a>
+                {% endif %}
+              {% endif %}
+            </p>
+          </div>
+        {% endif %}
+      {% endfor %}
 
     <!-- Comment form for this post -->
     <form method="post" action="{% url 'post_details' post.id %}" class="mt-6">
