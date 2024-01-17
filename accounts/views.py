@@ -12,6 +12,7 @@ from django.template.loader import render_to_string
 from django.utils.http import urlsafe_base64_decode, urlsafe_base64_encode
 from django.utils.encoding import force_bytes, force_str
 from django.contrib.auth.tokens import default_token_generator
+from django.contrib.sites.shortcuts import get_current_site
 
 def activate(request, uid64, token):
     try:
@@ -44,7 +45,10 @@ def signup(request):
                 # Generate activation link
                 token = default_token_generator.make_token(user)
                 uid = urlsafe_base64_encode(force_bytes(user.pk))
-                confirm_link = f'https://phibook.onrender.com//accounts/activate/{uid}/{token}'
+
+                current_site = get_current_site(request)
+                confirm_link = f'https://{current_site.domain}/accounts/activate/{uid}/{token}'
+                # confirm_link = f'https://phibook.onrender.com/accounts/activate/{uid}/{token}'
                 # confirm_link = f'http://127.0.0.1:8000/accounts/activate/{uid}/{token}'
 
                 # Send activation email
