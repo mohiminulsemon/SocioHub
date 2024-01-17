@@ -11,7 +11,7 @@ from django.contrib import messages
 def my_posts(request):
     comments = models.Comment.objects.all()  # Fetch all comments
     user_posts = models.Post.objects.filter(author=request.user)
-    return render(request, 'my_posts.html', {'posts': user_posts, 'comments': comments})
+    return render(request, 'My_posts.html', {'posts': user_posts, 'comments': comments})
 
 
 @login_required
