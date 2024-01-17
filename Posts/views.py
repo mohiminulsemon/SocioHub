@@ -130,4 +130,4 @@ def delete_comment(request, comment_id):
         return HttpResponseForbidden("You don't have permission to delete this comment.")
 
     comment.delete()
-    return redirect('post_list')
+    return redirect('home')
