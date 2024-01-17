@@ -44,7 +44,8 @@ def signup(request):
                 # Generate activation link
                 token = default_token_generator.make_token(user)
                 uid = urlsafe_base64_encode(force_bytes(user.pk))
-                confirm_link = f'http://127.0.0.1:8000/accounts/activate/{uid}/{token}'
+                confirm_link = f'https://phibook.onrender.com//accounts/activate/{uid}/{token}'
+                # confirm_link = f'http://127.0.0.1:8000/accounts/activate/{uid}/{token}'
 
                 # Send activation email
                 email_subject = "Confirm your email"
