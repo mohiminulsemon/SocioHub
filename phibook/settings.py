@@ -29,7 +29,7 @@ SECRET_KEY = env('SECRET')
 DEBUG = True
 
 ALLOWED_HOSTS = ["*"]
-CSRF_TRUSTED_ORIGINS = ['https://phibook.onrender.com', 'https://*.127.0.0.1']
+CSRF_TRUSTED_ORIGINS = ['https://sociohub-0kd3.onrender.com', 'https://*.127.0.0.1']
 
 # Application definition
 
