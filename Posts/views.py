@@ -119,7 +119,7 @@ def toggle_edit_comment(request, comment_id):
     comment.edit_mode = not comment.edit_mode
     comment.save()
 
-    return redirect('post_list')
+    return redirect('home')
 
 
 @login_required

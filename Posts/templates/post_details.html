@@ -2,12 +2,12 @@
 {% load static %}
 
 {% block content %}
-  <div class="max-w-2xl mx-auto mt-8 p-6 bg-white rounded-md shadow-md">
+  <div class="max-w-2xl mx-auto my-8 p-6 bg-white rounded-md shadow-md">
     <h2 class="text-2xl font-semibold mb-4">{{ post.author }}</h2>
     <p class="text-gray-600 mb-4">{{ post.content }}</p>
 
     {% if post.image %}
-      <img class="w-full h-auto mb-4" src="{{ post.image.url }}" alt="{{ post.title }}">
+      <img class="w-full h-64 object-cover object-center mb-4" src="{{ post.image.url }}" alt="{{ post.title }}">
     {% endif %}
 
 

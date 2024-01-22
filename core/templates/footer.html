@@ -1,11 +1,50 @@
-<footer class="footer bg-blue-900 text-white border-b-2 mt-10">
-  <div class="container mx-auto px-6">
-    <div class="mt-5 flex flex-col items-center">
-      <div class="sm:w-2/3 text-center py-0  mx-auto">
-        <p class="text-md text-white font-bold ">
-          © {% now "Y" %} copyright SocioHub by Semon
+<footer class="bg-teal-200">
+  <div class="mx-auto max-w-screen-xl px-4 py-16 sm:px-6 lg:px-8 lg:pt-24">
+    <div class="text-center sm:text-right">
+      <a
+        class="inline-block rounded-full bg-teal-600 p-2 text-white shadow transition hover:bg-teal-500 sm:p-3 lg:p-4"
+        href="#MainContent"
+      >
+        <span class="sr-only">Back to top</span>
+        <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" viewBox="0 0 20 20" fill="currentColor">
+          <path fill-rule="evenodd" d="M14.707 12.707a1 1 0 01-1.414 0L10 9.414l-3.293 3.293a1 1 0 01-1.414-1.414l4-4a1 1 0 011.414 0l4 4a1 1 0 010 1.414z" clip-rule="evenodd"/>
+        </svg>
+      </a>
+    </div>
+
+    <div class="lg:flex lg:items-end lg:justify-between mt-8">
+      <div>
+        <div class="flex items-center justify-center text-teal-600 lg:justify-start">
+          <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
+            <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
+          </svg>
+          <span class="ml-2 font-bold text-xl">SocioHub</span>
+        </div>
+
+        <p class="mx-auto mt-6 max-w-md text-center text-gray-500 lg:text-left">
+
+          SocioHub is a social media platform that connects individuals and communities. With SocioHub, you can share moments, exchange ideas, and stay updated with the world around you. Join us and be part of a growing global community.
         </p>
       </div>
+
+      <ul class="mt-12 flex flex-wrap justify-center gap-6 md:gap-8 lg:mt-0 lg:justify-end lg:gap-12">
+        <li>
+          <a class="text-gray-700 transition hover:text-teal-600" href="/">About</a>
+        </li>
+        <li>
+          <a class="text-gray-700 transition hover:text-teal-600" href="/">Services</a>
+        </li>
+        <li>
+          <a class="text-gray-700 transition hover:text-teal-600" href="/">Projects</a>
+        </li>
+        <li>
+          <a class="text-gray-700 transition hover:text-teal-600" href="/">Blog</a>
+        </li>
+      </ul>
     </div>
+
+    <p class="mt-12 text-center text-sm text-gray-500 lg:text-right">
+      © {% now "Y" %} Copyright SocioHub by Semon
+    </p>
   </div>
 </footer>
