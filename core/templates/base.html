@@ -1,53 +1,54 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" >
   <head>
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width, initial-scale=1, shrink-to-fit=no"
     />
-    <meta name="description" content="Dummy Banking System" />
+    <meta name="description" content="" />
     <title>{% block head_title %}SocioHub{% endblock %}</title>
     <link
       href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
       rel="stylesheet"
     />
-      <!-- Include Alpine.js -->
-  <script src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js" defer></script>
+  
+
+    <!-- Include Alpine.js -->
+    <script
+      src="https://cdn.jsdelivr.net/npm/alpinejs@2.8.2/dist/alpine.min.js"
+      defer
+    ></script>
 
     {% block head_extra %}{% endblock %}
     <style>
       footer {
-                bottom: 0 ;
-                width: 100%;
-            }
+        bottom: 0;
+        width: 100%;
+      }
     </style>
   </head>
   <body>
-    {% include 'nav.html' %} 
-    {% block body %}
+    {% include 'nav.html' %} {% block body %}
     <div class="lg:container lg:mx-auto" id="main">
-       {% include 'messages.html' %} 
-       {% block content %}
-       {% endblock %}
+      {% include 'messages.html' %} {% block content %} {% endblock %}
     </div>
 
-    {% endblock %}
-    {% include 'footer.html' %}
+    {% endblock %} {% include 'footer.html' %}
 
     <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        const trigger = document.getElementById('dropdown-menu-trigger');
-        const menu = document.getElementById('dropdown-menu');
-    
-        trigger.addEventListener('click', function () {
-          menu.classList.toggle('hidden');
+      document.addEventListener("DOMContentLoaded", function () {
+        const trigger = document.getElementById("dropdown-menu-trigger");
+        const menu = document.getElementById("dropdown-menu");
+
+        trigger.addEventListener("click", function () {
+          menu.classList.toggle("hidden");
         });
-    
-        document.addEventListener('click', function (event) {
+
+        document.addEventListener("click", function (event) {
           if (!trigger.contains(event.target) && !menu.contains(event.target)) {
-            menu.classList.add('hidden');
+            menu.classList.add("hidden");
           }
         });
       });
