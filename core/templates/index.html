@@ -5,23 +5,6 @@
 
 {% block content %}
 
-<section class="text-gray-600 body-font relative m-4">
-    <img class="w-full h-64 object-cover object-center" src="{% static '../static/cover.jpg' %}" alt="Cover Image">
-    <!-- <div class="absolute inset-0 bg-gray-900 bg-opacity-50"> -->
-    <div class="absolute inset-0 ">
-        <div class="container px-5 py-24 mx-auto flex">
-            <div class="lg:w-1/2 md:w-2/3 mx-auto">
-                <div class="text-center">
-                    <h1 class="text-teal-500 text-5xl font-bold">SocioHub</h1>
-                    <p class="text-teal-500 text-xl">Share your thoughts with others</p>
-                </div>
-            </div>
-        </div>
-
-    </div>
-</section>
-
-
 <section class="text-gray-600 body-font">
   <h2 class="text-3xl font-bold text-center">Top Posts</h2>
     <div class="container px-5 py-12 mx-auto">
@@ -74,5 +57,23 @@
       </div>
     </div>
   </section>
+
+
+  <!--before  footer  -->
+  <section class="text-gray-600 body-font relative m-4 lg:container mx-auto">
+    <img class="w-full h-64 object-cover object-center" src="{% static '../static/cover.jpg' %}" alt="Cover Image">
+    <!-- <div class="absolute inset-0 bg-gray-900 bg-opacity-50"> -->
+    <div class="absolute inset-0 ">
+        <div class="container px-5 py-24 mx-auto flex">
+            <div class="lg:w-1/2 md:w-2/3 mx-auto">
+                <div class="text-center">
+                    <h1 class="text-teal-500 text-5xl font-bold">SocioHub</h1>
+                    <p class="text-teal-500 text-xl">Share your thoughts with others</p>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
 
 {% endblock %}

@@ -3,10 +3,17 @@
 {% block content %}
     {% if form.non_field_errors %}
         {% for error in form.non_field_errors %}
-            <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
-                <p class="font-bold">Error!</p>
-                <p class="block sm:inline">{{ error }}</p>
-            </div>
+        <script>
+            document.addEventListener('DOMContentLoaded', function() {
+                Swal.fire({
+                    icon:'error',
+                    title: '{{ title }}',
+                    text: '{{ error }}',
+                    confirmButtonText: 'OK',
+                })
+            });
+        
+        </script>
         {% endfor %}
     {% endif %}
 

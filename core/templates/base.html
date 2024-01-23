@@ -1,31 +1,30 @@
 {% load static %}
 <!DOCTYPE html>
-<html lang="en" >
-  <head>
+<html lang="en">
+<head>
     <meta charset="utf-8" />
-    <meta
-      name="viewport"
-      content="width=device-width, initial-scale=1, shrink-to-fit=no"
-    />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
     <meta name="description" content="" />
     <title>{% block head_title %}SocioHub{% endblock %}</title>
-    <link
-      href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css"
-      rel="stylesheet"
-    />
-
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" />
     {% block head_extra %}{% endblock %}
-    <style>
-    </style>
-  </head>
-  <body class="flex flex-col min-h-screen bg-blue-200">
-    {% include 'nav.html' %} {% block body %}
-    <div class="lg:container lg:mx-auto flex-grow" id="main">
-      {% include 'messages.html' %} {% block content %} {% endblock %}
-    </div>
+</head>
 
+<body class="flex flex-col min-h-screen bg-gray-200"> <!-- Updated background color -->
+
+    {% include 'nav.html' %}
+    
+    {% block body %}
+    <div class="lg:container lg:mx-auto flex-grow" id="main">
+        {% include 'messages.html' %}
+        {% block content %} {% endblock %}
+    </div>
     {% endblock %}
+
     {% include 'footer.html' %}
 
-  </body>
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</body>
 </html>
