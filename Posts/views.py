@@ -5,7 +5,8 @@ from django.http import HttpResponseForbidden
 from . import models
 from . import forms
 from django.contrib import messages
-
+from django.template.loader import render_to_string
+from django.http import JsonResponse
 
 @login_required
 def my_posts(request):
@@ -121,13 +122,30 @@ def toggle_edit_comment(request, comment_id):
 
     return redirect('home')
 
+@login_required
+def edit_comment(request, comment_id, post_id):
+    comment = get_object_or_404(models.Comment, id=comment_id)
+    post = get_object_or_404(models.Post, id=post_id)
+
+    if comment.user != request.user:
+        return HttpResponseForbidden("You don't have permission to edit this comment.")
+
+    if request.method == 'POST':
+        comment_form = CommentForm(request.POST, instance=comment)
+        if comment_form.is_valid():
+            comment_form.save()
+            return redirect('post_details', post_id)
+
+    form = CommentForm(instance=comment)
+    return redirect('post_details', post_id, {'form': form})
 
 @login_required
-def delete_comment(request, comment_id):
+def delete_comment(request, comment_id, post_id):
     comment = get_object_or_404(models.Comment, id=comment_id)
+    post = get_object_or_404(models.Post, id=post_id)
 
     if comment.user != request.user:
         return HttpResponseForbidden("You don't have permission to delete this comment.")
 
     comment.delete()
-    return redirect('home')
+    return redirect('post_details', post_id=post.id)

@@ -1,48 +1,57 @@
-{% extends 'base.html' %}
-{% load static %}
+{% extends 'base.html' %} {% load static %} {% block content %}
+<div class="max-w-2xl mx-auto my-8 p-6 bg-white rounded-md shadow-md">
+  <h2 class="text-2xl font-semibold mb-4">{{ post.author }}</h2>
+  <p class="text-gray-600 mb-4">{{ post.content }}</p>
 
-{% block content %}
-  <div class="max-w-2xl mx-auto my-8 p-6 bg-white rounded-md shadow-md">
-    <h2 class="text-2xl font-semibold mb-4">{{ post.author }}</h2>
-    <p class="text-gray-600 mb-4">{{ post.content }}</p>
+  {% if post.image %}
+  <img
+    class="w-full h-64 object-cover object-center mb-4"
+    src="{{ post.image.url }}"
+    alt="{{ post.title }}"
+  />
+  {% endif %}
 
-    {% if post.image %}
-      <img class="w-full h-64 object-cover object-center mb-4" src="{{ post.image.url }}" alt="{{ post.title }}">
-    {% endif %}
+  <p class="text-gray-700">Likes: {{ post.likes.count }}</p>
 
+  <!-- Display comments for this post -->
+  <h3 class="text-xl font-semibold mt-6 mb-2">Comments:</h3>
+  {% for comment in comments %} {% if comment.post == post %}
+  <div class="bg-gray-100 p-4 rounded-md mb-2">
+    <p class="text-gray-800">
+      <strong>{{ comment.user.username }}:</strong>
 
-    <p class="text-gray-700">Likes: {{ post.likes.count }}</p>
+      {{ comment.text }} 
+      {% if comment.user == request.user %}
+      <a
+        class="text-blue-500"
+        href="{% url 'edit_comment' comment.id post.id %}"
+        >Edit</a
+      >
+      <a
+        class="text-red-500"
+        href="{% url 'delete_comment' comment.id post.id %}"
+        >Delete</a
+      >
+      <div class="mt-4 hidden " id="edit-comment">
 
-
-      <!-- Display comments for this post -->
-      <h3 class="text-xl font-semibold mt-6 mb-2">Comments:</h3>
-      {% for comment in comments %}
-        {% if comment.post == post %}
-          <div class="bg-gray-100 p-4 rounded-md mb-2">
-            <p class="text-gray-800"><strong>{{ comment.user.username }}:</strong>
-              {% if comment.edit_mode %}
-                <form method="post" action="{% url 'toggle_edit_comment' comment.id %}">
-                  {% csrf_token %}
-                  {{ comment_form.text }} {# Change this line to display the text input field #}
-                  <button class="text-blue-500 hover:text-blue-600 p-4 border-2 border-blue-500 rounded" type="submit">Save</button>
-                </form>
-              {% else %}
-                {{ comment.text }}
-                {% if comment.user == request.user %}
-                  <a class="text-blue-500" href="{% url 'toggle_edit_comment' comment.id %}">Edit</a>
-                  <a class="text-red-500" href="{% url 'delete_comment' comment.id %}">Delete</a>
-                {% endif %}
-              {% endif %}
-            </p>
-          </div>
-        {% endif %}
-      {% endfor %}
-
-    <!-- Comment form for this post -->
-    <form method="post" action="{% url 'post_details' post.id %}" class="mt-6">
-      {% csrf_token %}
-      {{ comment_form.as_p }}
-      <button type="submit" class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600">Add Comment</button>
-    </form>
+      </div>
+      {% endif %}
+    </p>
   </div>
+  {% endif %} {% endfor %}
+
+  <!-- Comment form for this post -->
+  <form method="post" action="{% url 'post_details' post.id %}" class="mt-6">
+    {% csrf_token %} {{ comment_form.as_p }}
+    <button
+      type="submit"
+      class="bg-green-500 text-white px-4 py-2 rounded hover:bg-green-600"
+    >
+      Add Comment
+    </button>
+  </form>
+</div>
+
+
+
 {% endblock %}

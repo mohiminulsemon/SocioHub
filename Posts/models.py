@@ -19,7 +19,6 @@ class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     text = models.TextField()
     created_at = models.DateTimeField(auto_now_add=True)
-    edit_mode = models.BooleanField(default=False)  # Add this line
 
     def __str__(self):
         return f'Comment by {self.user.username} on {self.post.author.username}\'s post'
