@@ -4,7 +4,10 @@
 {% block head_title %}SocioHub-Home{% endblock %} 
 
 {% block content %}
+  <!-- UserSpotlight Section -->
+{% include 'spotlight.html' %}
 
+  <!-- Top Posts Section -->
 <section class="text-gray-600 body-font">
   <h2 class="text-3xl font-bold text-center">Top Posts</h2>
     <div class="container px-5 py-12 mx-auto">
@@ -58,6 +61,9 @@
     </div>
   </section>
 
+
+  <!-- Latest News Section -->
+  {% include 'latest_news.html' %}
 
   <!--before  footer  -->
   <section class="text-gray-600 body-font relative m-4 lg:container mx-auto">

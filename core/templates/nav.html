@@ -1,13 +1,12 @@
-<nav class="flex items-center justify-between flex-wrap bg-indigo-500 text-white py-4 px-10">
-  <div class="flex items-center justify-center  text-white mr-6">
+<nav class="flex items-center justify-between flex-wrap bg-white  py-4 px-10">
+  <div class="flex items-center justify-center  text-base mr-6">
     <svg xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" class="w-10 h-10 text-white p-2 bg-indigo-500 rounded-full" viewBox="0 0 24 24">
       <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"></path>
     </svg>
-      <span class="font-semibold text-xl tracking-tight  text-3xl "><a href="/">SocioHub</a></span>
-      <a href="{% url 'home' %}" class="inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none bg-teal-900 rounded text-teal-100 border-white hover:border-transparent hover:bg-teal-500 mt-4 lg:mt-0">Home</a>
+      <span class="font-semibold text-xl tracking-tight  text-3xl text-teal-900 ml-2"><a href="/">SocioHub</a></span>
   </div>
   <div class="block md:hidden">
-      <button id="menu-toggle" class="flex items-center px-3 py-2 border rounded text-white border-white-400 hover:text-white hover:border-white">
+      <button id="menu-toggle" class="flex items-center px-3 py-2 border rounded text-base border-gray-400 hover:text-base hover:border-white">
           <svg class="fill-current h-3 w-3" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><title>Menu</title><path d="M0 3h20v2H0V3zm0 6h20v2H0V9zm0 6h20v2H0v-2z"/></svg>
       </button>
   </div>
@@ -16,30 +15,35 @@
           <div class="text-md lg:flex-grow">
           
           </div>
-          <div class="flex w-auto">
-            <a href="{% url 'my_posts' %}" class="inline-block font-medium text-sm px-4 mr-4 py-3 leading-none bg-teal-900 rounded text-teal-100 border-white hover:border-transparent hover:bg-teal-500 mt-4 lg:mt-0">My Post</a>
-            <a href="{% url 'add_post' %}" class="inline-block font-medium text-sm px-4 mr-4 py-3 leading-none bg-teal-900 rounded text-teal-100 border-white hover:border-transparent hover:bg-teal-500 mt-4 lg:mt-0">Add_post</a>
-              <a href="{% url 'profile' %}" class="inline-block font-medium text-sm px-4 mr-4 py-3 leading-none bg-teal-900 rounded text-teal-100 border-white hover:border-transparent hover:bg-teal-500 mt-4 lg:mt-0">Profile</a>
-              <a href="{% url 'logout' %}" class="inline-block font-medium text-sm px-4 py-3 leading-none bg-teal-900 rounded text-teal-100 border-white hover:border-transparent hover:bg-teal-500 mt-4 lg:mt-0">Logout</a>
+          <div class="flex flex-wrap w-auto justify-center items-center">
+            <a href="{% url 'home' %}" class="inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none text-teal-900 border-b-2 border-teal-900 hover:border-teal-500 hover:bg-gray-400 mt-4 lg:mt-0">Home</a>
+            <a href="{% url 'my_posts' %}" class="inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none text-teal-900 border-b-2 border-teal-900 hover:border-teal-500 hover:bg-gray-400 mt-4 lg:mt-0">My Post</a>
+            <a href="{% url 'add_post' %}" class="inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none text-teal-900 border-b-2 border-teal-900 hover:border-teal-500 hover:bg-gray-400 mt-4 lg:mt-0">Add_post</a>
+              <a href="{% url 'profile' %}" class="inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none text-teal-900 border-b-2 border-teal-900 hover:border-teal-500 hover:bg-gray-400 mt-4 lg:mt-0">Profile</a>
+              <a href="{% url 'logout' %}" class="inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none text-teal-900 border-b-2 border-teal-900 hover:border-teal-500 hover:bg-gray-400 mt-4 lg:mt-0">Logout</a>
           </div>
       {% else %}
           <div class="text-md lg:flex-grow"></div>
           <div>
-              <a href="{% url 'login' %}" class="mr-2 inline-block font-medium text-sm px-4 py-3 leading-none bg-teal-900 rounded text-teal-100 border-white hover:border-transparent hover:bg-teal-500 mt-4 lg:mt-0">Login</a>
+            <a href="{% url 'home' %}" class="inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none text-teal-900 border-b-2 border-teal-900 hover:border-teal-500 hover:bg-gray-400 mt-4 lg:mt-0">Home</a>
           </div>
           <div>
-              <a href="{% url 'signup' %}" class="inline-block font-medium text-sm px-4 py-3 ml-4 leading-none bg-teal-900 rounded text-teal-100 border-white hover:border-transparent hover:bg-teal-500 mt-4 lg:mt-0">Register</a>
+              <a href="{% url 'login' %}" class="mr-2 inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none text-teal-900 border-b-2 border-teal-900 hover:border-teal-500 hover:bg-gray-400 mt-4 lg:mt-0">Login</a>
+          </div>
+          <div>
+              <a href="{% url 'signup' %}" class="inline-block font-medium text-sm px-4 py-3 ml-4 leading-none bg-teal-900 rounded text-teal-100 border-white hover:border-transparent hover:bg-gray-400 hover:bg-teal-500 mt-4 lg:mt-0">Register</a>
           </div>
       {% endif %}
   </div>
 
   <div id="menu" class="hidden md:hidden items-center space-x-2">
     {% if request.user.is_authenticated %}
-        <div class="flex w-auto">
-          <a href="{% url 'my_posts' %}" class="inline-block font-medium text-sm px-4 mr-4 py-3 leading-none bg-teal-900 rounded text-teal-100 border-white hover:border-transparent hover:bg-teal-500 mt-4 lg:mt-0">My Post</a>
-          <a href="{% url 'add_post' %}" class="inline-block font-medium text-sm px-4 mr-4 py-3 leading-none bg-teal-900 rounded text-teal-100 border-white hover:border-transparent hover:bg-teal-500 mt-4 lg:mt-0">Add_post</a>
-            <a href="{% url 'profile' %}" class="inline-block font-medium text-sm px-4 mr-4 py-3 leading-none bg-teal-900 rounded text-teal-100 border-white hover:border-transparent hover:bg-teal-500 mt-4 lg:mt-0">Profile</a>
-            <a href="{% url 'logout' %}" class="inline-block font-medium text-sm px-4 py-3 leading-none bg-teal-900 rounded text-teal-100 border-white hover:border-transparent hover:bg-teal-500 mt-4 lg:mt-0">Logout</a>
+        <div class="flex flex-wrap w-auto justify-center items-center">
+          <a href="{% url 'home' %}" class="inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none text-teal-900 border-b-2 border-teal-900 hover:border-teal-500 hover:bg-gray-400 mt-4 lg:mt-0">Home</a>
+          <a href="{% url 'my_posts' %}" class="inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none text-teal-900 border-b-2 border-teal-900 hover:border-teal-500 hover:bg-gray-400 mt-4 lg:mt-0">My Post</a>
+          <a href="{% url 'add_post' %}" class="inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none text-teal-900 border-b-2 border-teal-900 hover:border-teal-500 hover:bg-gray-400 mt-4 lg:mt-0">Add_post</a>
+            <a href="{% url 'profile' %}" class="inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none text-teal-900 border-b-2 border-teal-900 hover:border-teal-500 hover:bg-gray-400 mt-4 lg:mt-0">Profile</a>
+            <a href="{% url 'logout' %}" class="inline-block font-medium text-sm px-4 mr-4 ml-4 py-3 leading-none text-teal-900 border-b-2 border-teal-900 hover:border-teal-500 hover:bg-gray-400 mt-4 lg:mt-0">Logout</a>
         </div>
     {% endif %}
 </div>
