@@ -6,7 +6,7 @@
 
     <div class="flex items-center justify-center mb-8">
       <img
-        src="{% if user.profile.image %}{{ user.profile.image.url }}{% else %}{% static '../static/profile.jpg' %}{% endif %}"
+        src="{% if user.address.profile_pic %}{{ user.address.profile_pic.url }}{% else %}{% static '../static/profile.jpg' %}{% endif %}"
         alt="Profile Image"
         class="w-32 h-32 rounded-full border-4 border-blue-500"
       >

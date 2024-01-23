@@ -111,6 +111,7 @@ def user_logout(request):
 # @login_required
 def profile(request):
     if request.user.is_authenticated:
+        # print(request.user.address.profile_pic)
         return render(request, 'profile.html')
     else:
         messages.error(request, 'You must be logged in to view this page.')

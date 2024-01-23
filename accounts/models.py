@@ -7,6 +7,7 @@ from .constants import  GENDER_TYPE
 
 class UserDetails(models.Model):
     user = models.OneToOneField(User, related_name='address', on_delete=models.CASCADE)
+    profile_pic = models.ImageField(null=True, blank=True, upload_to='accounts/static/profile_pics/')
     birth_date = models.DateField(null=True, blank=True)
     gender = models.CharField(max_length=10, choices=GENDER_TYPE)
     street_address = models.CharField(max_length=100)
