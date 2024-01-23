@@ -54,6 +54,7 @@ class UserUpdateForm(forms.ModelForm):
     street_address = forms.CharField(max_length=100)
     city = forms.CharField(max_length=100)
     country = forms.CharField(max_length=100)
+    profile_pic = forms.ImageField()
 
     class Meta:
         model = User
@@ -78,6 +79,7 @@ class UserUpdateForm(forms.ModelForm):
             self.fields['street_address'].initial = user_address.street_address
             self.fields['city'].initial = user_address.city
             self.fields['country'].initial = user_address.country
+            self.fields['profile_pic'].initial = user_address.profile_pic
 
     def save(self, commit=True):
         user = super().save(commit=False)
@@ -93,6 +95,7 @@ class UserUpdateForm(forms.ModelForm):
             user_address.street_address = self.cleaned_data['street_address']
             user_address.city = self.cleaned_data['city']
             user_address.country = self.cleaned_data['country']
+            user_address.profile_pic = self.cleaned_data['profile_pic']
             user_address.save()
 
         return user

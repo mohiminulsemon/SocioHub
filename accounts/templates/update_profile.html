@@ -1,4 +1,4 @@
-{% extends 'base.html' %} {% load static %} {% block head_title %}Banking System{% endblock %} {% block content %} {% if form.non_field_errors %} {% for error in form.non_field_errors %}
+{% extends 'base.html' %} {% load static %} {% block head_title %}SocioHub- UpdateProfile{% endblock %} {% block content %} {% if form.non_field_errors %} {% for error in form.non_field_errors %}
 <div class="bg-red-100 border border-red-400 text-red-700 px-4 py-3 rounded relative mt-2" role="alert">
     <p class="font-bold">Error!</p>
     <p class="block sm:inline">{{ error }}</p>
@@ -13,13 +13,6 @@
 
 <div class="bg-white px-3 py-4 rounded-xl my-6">
 
-    <div class="flex items-center justify-between ">
-        <h4 class="font-bold text-3xl text-left pb-5">Account NO: {{request.user.account.account_number}}</h4>
-        <a href="{% url 'changePassword' %}"
-            class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline">
-            Change Password
-        </a>
-    </div>
     <h1 class="font-bold text-3xl text-center pb-5">Update Profile Information</h1>
 
     <div class="w-full mt-10">
@@ -107,6 +100,18 @@
                     {% endfor %} {% endif %}
                 </div>
             </div>
+            <!-- create a div for upload image -->
+
+            <div class="flex flex-wrap -mx-3 mb-6">
+                <div class="w-full md:w-1/2 px-3 mb-6 md:mb-0">
+                    <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="{{ form.profile_pic.id_for_label }}">
+                       upload profile picture
+                    </label> {{ form.profile_pic }} {% if form.profile_pic.errors %} {% for error in form.profile_pic.errors %}
+                    <p class="text-red-600 text-sm italic pb-2">{{ error }}</p>
+                    {% endfor %} {% endif %}
+                </div>
+            </div>
+
             <div class="flex items-center justify-between">
                 <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline" type="submit">
                     Update

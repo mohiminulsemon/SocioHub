@@ -4,7 +4,29 @@
 {% block head_title %}SocioHub-Home{% endblock %} 
 
 {% block content %}
+
+<!-- add post  section -->
+<div class="flex items-center justify-center container mx-auto">
+  <div class="w-1/4">
+      <img src="{% static '../static/share.jpg' %}" alt="Profile Image" class="w-full h-auto rounded-full">
+  </div>
+
+  <div class="w-1/2 p-6 mb-6">
+      <form method="post" action="{% url 'add_post' %}">
+          {% csrf_token %}
+          <div class="mb-4">
+              <label for="status" class="block text-gray-700 font-bold mb-2">What's on your mind?</label>
+              <textarea name="content" id="status" rows="3" placeholder="Share your status..." class="w-full px-3 py-2 border rounded-md focus:outline-none focus:ring focus:border-blue-300"></textarea>
+          </div>
+          <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-md hover:bg-blue-600">Post</button>
+      </form>
+  </div>
+</div>
+
+
+
   <!-- UserSpotlight Section -->
+  <h2 class="text-3xl font-bold text-center text-gray-600 mt-2">Spotlights</h2>
 {% include 'spotlight.html' %}
 
   <!-- Top Posts Section -->
@@ -63,6 +85,7 @@
 
 
   <!-- Latest News Section -->
+  <h2 class="text-3xl font-bold text-center text-gray-600">Latest News</h2>
   {% include 'latest_news.html' %}
 
   <!--before  footer  -->

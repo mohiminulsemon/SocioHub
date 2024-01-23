@@ -163,8 +163,8 @@ class UserProfileUpdateView(LoginRequiredMixin,View):
         form = forms.UserUpdateForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.success(
-                request, 'Your profile has been updated successfully!')
+            messages.success(request, 'Your profile has been updated successfully!')
             return redirect('home')
         else:
             print(form.errors)
+            return render(request, self.template_name, {'form': form})
