@@ -11,9 +11,6 @@
 - [Installation](#installation)
 - [Usage](#usage)
 - [Database Models](#database-models)
-- [Views and Templates](#views-and-templates)
-- [Forms](#forms)
-- [Static Files](#static-files)
 - [Deployment](#deployment)
 
 ## Features
@@ -41,15 +38,6 @@
 
 ## Database Models
 - Here MySql database is used
-
-## Views and Templates
-- 
-
-## Forms
-- 
-
-## Static Files
-- 
 
 ## Deployment
 - Deployed in Onrender

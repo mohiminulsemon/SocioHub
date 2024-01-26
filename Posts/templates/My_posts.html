@@ -1,41 +1,36 @@
-{% extends 'base.html' %} {% block content %}
-<div class="container mx-auto my-10">
-  <!-- calculate the length of posts -->
-  <h1 class="text-3xl font-semibold text-gray-800 mb-6 text-center">
-    My Posts
-  </h1>
-  {% if posts %} {% for post in posts %}
-  <div class="bg-white shadow-lg rounded-md p-6 mb-6">
-    <h2 class="text-2xl font-bold mb-2">{{ post.author }}</h2>
-    <p class="text-gray-700 mb-4">{{ post.content }}</p>
-    {% if post.image %}
-    <img
-      class="w-40 h-40 object-cover mb-4"
-      src="{{ post.image.url }}"
-      alt="{{ post.title }}"
-    />
+{% extends 'base.html' %}
+
+{% block content %}
+<div class="container mx-auto my-10 flex items-center justify-center min-h-screen">
+  <div class="w-full max-w-md bg-white shadow-md rounded-md p-6">
+    <h1 class="text-4xl font-bold text-center text-gray-800 mb-8">My Posts</h1>
+
+    {% if posts %}
+      {% for post in posts %}
+        <div class="bg-gray-100 shadow-lg rounded-md p-6 mb-8">
+          <h2 class="text-2xl font-semibold mb-4 text-blue-700">{{ post.author }}</h2>
+          <p class="text-gray-700 mb-6">{{ post.content }}</p>
+          
+          {% if post.image %}
+            <img class="w-full h-48 object-cover mb-6" src="{{ post.image.url }}" alt="{{ post.title }}">
+          {% endif %}
+
+          <div class="flex space-x-4">
+            <a href="{% url 'edit_post' post.id %}" class="bg-green-500 text-white py-2 px-4 rounded-md hover:bg-green-600 transition duration-300">Edit</a>
+            <a href="{% url 'delete_post' post.id %}" class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition duration-300">Delete</a>
+          </div>
+
+          <h3 class="text-lg font-semibold mt-8 mb-4">Comments:</h3>
+          {% for comment in comments %}
+            {% if comment.post == post %}
+              <p class="text-gray-700">{{ comment.user.username }}: {{ comment.text }}</p>
+            {% endif %}
+          {% endfor %}
+        </div>
+      {% endfor %}
+    {% else %}
+      <p class="text-center text-gray-700">You haven't posted anything yet.</p>
     {% endif %}
-    <!-- Add edit and delete buttons -->
-    <div class="flex mb-4">
-      <a
-        href="{% url 'edit_post' post.id %}"
-        class="bg-green-500 text-white py-2 px-4 rounded-md mr-4 hover:bg-green-600"
-        >Edit</a
-      >
-      <a
-        href="{% url 'delete_post' post.id %}"
-        class="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600"
-        >Delete</a
-      >
-    </div>
-    <!-- Display comments for this post -->
-    <h3 class="text-lg font-semibold mb-2">Comments:</h3>
-    {% for comment in comments %} {% if comment.post == post %}
-    <p class="text-gray-700">{{ comment.user.username }}: {{ comment.text }}</p>
-    {% endif %} {% endfor %}
   </div>
-  {% endfor %} {% else %}
-  <p>You haven't posted anything yet.</p>
-  {% endif %}
 </div>
 {% endblock %}

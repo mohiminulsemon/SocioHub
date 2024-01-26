@@ -95,7 +95,7 @@ def edit_post(request, pk):
         form = PostForm(request.POST,request.FILES, instance=post)
         if form.is_valid():
             form.save()
-            return redirect('post_list')
+            return redirect('my_posts')
 
     else:
         form = PostForm(instance=post)
@@ -106,7 +106,7 @@ def edit_post(request, pk):
 def delete_post(request, pk):
     post = get_object_or_404(models.Post, pk=pk)
     post.delete()
-    return redirect('home')
+    return redirect('my_posts')
 
 
 # comment section
@@ -122,22 +122,24 @@ def toggle_edit_comment(request, comment_id):
 
     return redirect('home')
 
+
 @login_required
 def edit_comment(request, comment_id, post_id):
     comment = get_object_or_404(models.Comment, id=comment_id)
     post = get_object_or_404(models.Post, id=post_id)
 
-    if comment.user != request.user:
-        return HttpResponseForbidden("You don't have permission to edit this comment.")
-
     if request.method == 'POST':
         comment_form = CommentForm(request.POST, instance=comment)
         if comment_form.is_valid():
             comment_form.save()
-            return redirect('post_details', post_id)
+            return redirect('post_details', post_id=post.id)
 
-    form = CommentForm(instance=comment)
-    return redirect('post_details', post_id, {'form': form})
+    else:
+        comment_form = CommentForm(instance=comment)
+
+    return render(request, 'edit_comment.html', {'form': comment_form})
+
+
 
 @login_required
 def delete_comment(request, comment_id, post_id):
